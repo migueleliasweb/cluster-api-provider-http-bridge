@@ -1,0 +1,13 @@
+FROM golang:1.17.5-buster
+
+WORKDIR /opt/cluster-api-provider-generic-http
+
+RUN apt update -y && \
+    apt install -y curl
+
+COPY .hack .hack
+
+RUN ./.hack/install-kube-builder.sh
+RUN ./.hack/install-clusterctl.sh
+
+COPY . .
